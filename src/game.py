@@ -1,7 +1,8 @@
 import pygame as pg
+import config
 
 pg.init()
-screen = pg.display.set_mode((600,800))
+screen = pg.display.set_mode(config.DISPLAY)
 clock = pg.time.Clock()
 
 running = True
@@ -15,5 +16,5 @@ while running:
     screen.fill("black")
     
     pg.display.flip()
-    clock.tick(60)        
+    clock.tick(config.FPS)        
 pg.quit()
