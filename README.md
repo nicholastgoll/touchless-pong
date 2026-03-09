@@ -1,6 +1,6 @@
 # Touchless Pong
 
-This is a touchless pong game that uses the Raspberry Pi Model 4B, HC-SR04
+This is a touchless pong game that uses the Raspberry Pi 4 Model B, HC-SR04
 ultrasonic distance sensor, and more.
 
 ## TODO Outline:
