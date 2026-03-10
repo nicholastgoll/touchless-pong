@@ -1,8 +1,8 @@
 import game
 from controllers.arrow_keys import ArrowKeyController
-from controllers.distance_sensor import DistanceSensor
+from controllers.distance_sensor import SensorController
 
 controller = ArrowKeyController()
-#controller = DistanceSensor()
+#controller = SensorController()
 
 game.run(controller)

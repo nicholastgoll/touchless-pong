@@ -16,7 +16,7 @@ FPS = 60
 BALL_SPEED_X = 9 * random.choice((1, -1))
 BALL_SPEED_Y = 9 * random.choice((1, -1))
 # player movement w arrow keys
-ARROW_SPEED = 0.02
+ARROW_SPEED = 0.01
 # opponent movement
 OPPONENT_SPEED = 6
 #colors

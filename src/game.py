@@ -13,20 +13,22 @@ def ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
         config.PLAYER_SCORE += 1
         if config.PLAYER_SCORE == 7:
             goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font)
-            pg.quit()
+            return False
         else: 
             ball_restart(ball, WIDTH, HEIGHT)
     if ball.bottom >= HEIGHT:
         config.OPPONENT_SCORE += 1
         if config.OPPONENT_SCORE == 7:
             goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font)
-            pg.quit()
+            return False
         else: 
             ball_restart(ball, WIDTH, HEIGHT)
     
     if ball.colliderect(player) or ball.colliderect(opponent):
         config.BALL_SPEED_Y *= -1
 
+    return True
+    
 def player_movement(player, controller, WIDTH):
     player.centerx = int(controller.get_paddle_pos() * WIDTH)
     if player.left <= 0:
@@ -109,8 +111,11 @@ def run(controller):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
+                
+        running = ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font)
+        if not running:
+            break
         
-        ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font)
         player_movement(player, controller, WIDTH)
         
         if ball.y >= HEIGHT/2:
