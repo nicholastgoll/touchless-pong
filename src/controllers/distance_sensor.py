@@ -2,10 +2,24 @@ from gpiozero import DistanceSensor
 from time import sleep
 import config
 
-sensor = DistanceSensor(echo=config.ECHO_PIN, trigger=config.TRIGGER_PIN, max_distance=config.MAX_DISTANCE)
+class SensorController():
+    def __init__(self):
+        self.sensor = DistanceSensor(
+            echo=config.ECHO_PIN,
+            trigger=config.TRIGGER_PIN,
+            max_distance=config.MAX_DISTANCE
+        )
+        
+    # returns float 0.0-1 where 1 is MAX_DISTANCE
+    def get_paddle_pos(self):
+        return self.sensor.distance
 
-while True:
-    cm = sensor.distance * config.max_distance * 100
-    print("Distance(cm): " + cm)
-    sleep(.5)
-    
+
+
+#for testing
+
+# sensor = DistanceSensor(echo=config.ECHO_PIN, trigger=config.TRIGGER_PIN, max_distance=config.MAX_DISTANCE)
+# while True:
+#     cm = sensor.distance * config.MAX_DISTANCE * 100
+#     print(f"Distance(cm): {cm:.2f}")
+#     sleep(.5)
