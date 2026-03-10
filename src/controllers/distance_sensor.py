@@ -1,6 +1,6 @@
 from gpiozero import DistanceSensor
-from time import sleep
 import config
+from time import sleep
 
 class SensorController():
     def __init__(self):
