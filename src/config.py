@@ -7,7 +7,10 @@ import random
 # ----- distance_sensor.py -----
 ECHO_PIN = 18
 TRIGGER_PIN = 17
-MAX_DISTANCE = 0.5 # MUST TEST THIS AND ADJUST AS NEEDED
+MAX_DISTANCE = 0.5
+
+SENSOR_MAX = 0.2
+SENSOR_MIN = 0.05
 
 # ----- game.py -----
 DISPLAY = (700,900)
