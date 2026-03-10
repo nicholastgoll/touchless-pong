@@ -13,7 +13,7 @@ SENSOR_MAX = 0.2
 SENSOR_MIN = 0.05
 
 # ----- game.py -----
-DISPLAY = (700,900)
+DISPLAY = (500,600)
 FPS = 60
 # ball movement
 BALL_SPEED_X = 9 * random.choice((1, -1))
