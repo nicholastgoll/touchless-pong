@@ -9,19 +9,20 @@ ECHO_PIN = 18
 TRIGGER_PIN = 17
 MAX_DISTANCE = 0.5
 
-SENSOR_MAX = 0.2
-SENSOR_MIN = 0.02
+SENSOR_MAX = 0.2 # 20 cm
+SENSOR_MIN = 0.05 # 5 cm
 
 # ----- game.py -----
 DISPLAY = (500,600)
 FPS = 60
 # ball movement
-BALL_SPEED_X = 9 * random.choice((1, -1))
-BALL_SPEED_Y = 9 * random.choice((1, -1))
+SPEED_MULTIPLIER = 0.4
+BALL_SPEED_X = 7 * random.choice((1, -1))
+BALL_SPEED_Y = 7 * random.choice((1, -1))
 # player movement w arrow keys
 ARROW_SPEED = 0.01
 # opponent movement
-OPPONENT_SPEED = 6
+OPPONENT_SPEED = 5
 #colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)

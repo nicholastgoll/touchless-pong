@@ -4,8 +4,8 @@ import random
 import config
 
 def ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
-    ball.x += config.BALL_SPEED_X
-    ball.y += config.BALL_SPEED_Y
+    ball.x += config.BALL_SPEED_X * config.SPEED_MULTIPLIER
+    ball.y += config.BALL_SPEED_Y * config.SPEED_MULTIPLIER
     
     if ball.left <= 0 or ball.right >= WIDTH:
         config.BALL_SPEED_X *= -1
@@ -26,6 +26,7 @@ def ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
     
     if ball.colliderect(player) or ball.colliderect(opponent):
         config.BALL_SPEED_Y *= -1
+        config.SPEED_MULTIPLIER = 1.0
 
     return True
     
@@ -51,6 +52,7 @@ def opponent_movement(opponent, ball, WIDTH):
 def ball_restart(ball, WIDTH, HEIGHT):
     ball.center = (WIDTH/2, HEIGHT/2)
     config.BALL_SPEED_X *= random.choice((1, -1))
+    config.SPEED_MULTIPLIER = 0.4
     
 def goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
     pg.event.pump()
@@ -75,8 +77,8 @@ def run(controller):
     
     # game rects
     ball = pg.Rect(WIDTH/2 - 10, HEIGHT/2 - 10, 20, 20)
-    player = pg.Rect(WIDTH/2 - 70, HEIGHT - 10, 140, 10)
-    opponent = pg.Rect(WIDTH/2 - 70, 0, 140, 10)
+    player = pg.Rect(WIDTH/2 - 60, HEIGHT - 10, 120, 10)
+    opponent = pg.Rect(WIDTH/2 - 50, 0, 100, 10)
     #original speed needed for opponent movement pauses
     old_speed = config.OPPONENT_SPEED
 
