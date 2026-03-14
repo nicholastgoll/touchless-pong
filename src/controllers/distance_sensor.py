@@ -16,7 +16,7 @@ class SensorController():
             pin_factory=factory
         )
         
-        self.readings = deque(maxlen=10)
+        self.readings = deque(maxlen=5)
         
     # returns float 0.0-1 where 1 is MAX_DISTANCE
     def get_paddle_pos(self):
