@@ -28,7 +28,9 @@ class SensorController():
         # clamp to 0.0–1.0
         clamped = max(0.0, min(1.0, mapped))
 
-        # smooth over last 5 readings
+        # smooth over last 5 readings and reject spikes
+        if abs(clamped - self.smoothed) > 0.3:
+            return self.smoothed
         self.smoothed += self.alpha * (clamped - self.smoothed)
         return self.smoothed
     
