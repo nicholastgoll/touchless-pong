@@ -86,23 +86,35 @@ def run(controller):
     score_player = pg.font.Font(None, 96)
     score_opponent = pg.font.Font(None, 96)
 
+    def check_quit():
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                return True
+        return False
+
+
+            
     # countdown from 5 at start of game
-    for i in range(5,0,-1):
-        pg.event.pump()
-        screen.fill(config.BLACK)
-        text = countdown_text.render(f"{i}", True, config.WHITE)
-        text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
-        screen.blit(text, text_rect)
-        pg.display.flip()
-        pg.time.wait(1000)
+    # for i in range(5,0,-1):
+    #     if check_quit():
+    #         pg.quit()
+    #         sys.exit()
+    #     screen.fill(config.BLACK)
+    #     text = countdown_text.render(f"{i}", True, config.WHITE)
+    #     text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
+    #     screen.blit(text, text_rect)
+    #     pg.display.flip()
+    #     pg.time.wait(1000)
         
-    pg.event.pump()
-    screen.fill(config.BLACK)
-    text = countdown_text.render("PONG!", True, config.WHITE)
-    text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
-    screen.blit(text, text_rect)
-    pg.display.flip()
-    pg.time.wait(1000)
+    # if check_quit():
+    #         pg.quit()
+    #         sys.exit()
+    # screen.fill(config.BLACK)
+    # text = countdown_text.render("PONG!", True, config.WHITE)
+    # text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
+    # screen.blit(text, text_rect)
+    # pg.display.flip()
+    # pg.time.wait(1000)
 
     running = True
 
@@ -111,6 +123,9 @@ def run(controller):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
+        
+        if not running:
+            break
                 
         running = ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font)
         if not running:

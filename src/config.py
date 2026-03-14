@@ -10,7 +10,7 @@ TRIGGER_PIN = 17
 MAX_DISTANCE = 0.5
 
 SENSOR_MAX = 0.2
-SENSOR_MIN = 0.05
+SENSOR_MIN = 0.02
 
 # ----- game.py -----
 DISPLAY = (500,600)
