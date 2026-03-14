@@ -29,6 +29,9 @@ class SensorController():
         # smooth over last 5 readings
         self.readings.append(clamped)
         return sum(self.readings) / len(self.readings)
+    
+    def close(self):
+        self.sensor.close()
 
 
 # for testing
