@@ -17,6 +17,8 @@ class SensorController():
         )
         
         self.readings = deque(maxlen=5)
+        self.smoothed = 0.5
+        self.alpha = 0.3
         
     # returns float 0.0-1 where 1 is MAX_DISTANCE
     def get_paddle_pos(self):
@@ -27,8 +29,8 @@ class SensorController():
         clamped = max(0.0, min(1.0, mapped))
 
         # smooth over last 5 readings
-        self.readings.append(clamped)
-        return sum(self.readings) / len(self.readings)
+        self.smoothed += self.alpha * (clamped - self.smoothed)
+        return self.smoothed
     
     def close(self):
         self.sensor.close()
