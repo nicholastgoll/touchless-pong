@@ -78,7 +78,7 @@ def run(controller):
     # game rects
     ball = pg.Rect(WIDTH/2 - 10, HEIGHT/2 - 10, 20, 20)
     player = pg.Rect(WIDTH/2 - 60, HEIGHT - 10, 120, 10)
-    opponent = pg.Rect(WIDTH/2 - 50, 0, 100, 10)
+    opponent = pg.Rect(WIDTH/2 - 60, 0, 120, 10)
     #original speed needed for opponent movement pauses
     old_speed = config.OPPONENT_SPEED
 
