@@ -12,8 +12,9 @@ from collections import deque
 from time import sleep
 
 class SensorController():
-    def __init__(self):
-        factory = PiGPIOFactory()
+    def __init__(self, factory=None):
+        if factory is None:
+            factory = PiGPIOFactory()
         self.sensor = DistanceSensor(
             echo=config.ECHO_PIN,
             trigger=config.TRIGGER_PIN,
