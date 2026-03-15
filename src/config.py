@@ -4,6 +4,10 @@ The purpose of this file is to provide constants to other files that are easily 
 
 import random
 
+# ----- LEDs -----
+RED_LED_PIN = 27
+GREEN_LED_PIN = 22
+
 # ----- distance_sensor.py -----
 ECHO_PIN = 18
 TRIGGER_PIN = 17
