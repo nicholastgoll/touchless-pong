@@ -3,7 +3,10 @@ The purpose of this file is to provide constants to other files that are easily 
 '''
 
 import random
+from gpiozero import LED
 
+# ----- LED -----
+GREEN_LED_PIN = LED(22)
 # ----- distance_sensor.py -----
 ECHO_PIN = 18
 TRIGGER_PIN = 17
