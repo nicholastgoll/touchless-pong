@@ -1,5 +1,4 @@
 import pygame as pg
-import sys
 import random
 import config
 
@@ -102,17 +101,17 @@ def run(controller, green_led=None):
     for i in range(5,0,-1):
         if check_quit():
             pg.quit()
-            sys.exit()
+            return
         screen.fill(config.BLACK)
         text = countdown_text.render(f"{i}", True, config.WHITE)
         text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
         screen.blit(text, text_rect)
         pg.display.flip()
         pg.time.wait(1000)
-        
+
     if check_quit():
             pg.quit()
-            sys.exit()
+            return
     screen.fill(config.BLACK)
     text = countdown_text.render("PONG!", True, config.WHITE)
     text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
@@ -166,4 +165,3 @@ def run(controller, green_led=None):
         clock.tick(config.FPS)        
 
     pg.quit()
-    sys.exit()
