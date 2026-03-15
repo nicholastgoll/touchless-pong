@@ -17,12 +17,12 @@ DISPLAY = (500,600)
 FPS = 60
 # ball movement
 SPEED_MULTIPLIER = 0.4
-BALL_SPEED_X = 7 * random.choice((1, -1))
-BALL_SPEED_Y = 7 * random.choice((1, -1))
+BALL_SPEED_X = 6 * random.choice((1, -1))
+BALL_SPEED_Y = 6 * random.choice((1, -1))
 # player movement w arrow keys
 ARROW_SPEED = 0.01
 # opponent movement
-OPPONENT_SPEED = 5
+OPPONENT_SPEED = 4
 #colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)

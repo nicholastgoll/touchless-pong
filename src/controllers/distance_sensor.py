@@ -1,3 +1,8 @@
+#pigpio library works as a client-server setup. The PiGPIOFactory() doesn't talk to the GPIO pins directly — 
+# it connects to a background daemon process (pigpiod) that does the actual hardware-timed GPIO work. 
+# That daemon listens on localhost:8888 by default.
+# must run sudo pigpiod in terminal first on pi!!
+# sudo systemctl enable pigpiod then sudo systemctl start pigpiod to keep it running even after reboot
 from gpiozero.pins.pigpio import PiGPIOFactory
 from gpiozero import DistanceSensor
 import sys, os
