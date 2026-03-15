@@ -1,4 +1,5 @@
 import pygame as pg
+import sys
 import random
 import config
 
@@ -65,11 +66,9 @@ def goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
     pg.display.flip()
     pg.time.wait(5000)
     
-def run(controller, green_led=None):
+def run(controller):
     pg.init()
-    if green_led:
-        green_led.on()
-    
+
     WIDTH, HEIGHT = config.DISPLAY
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     pg.display.set_caption("Touchless Pong")
@@ -101,7 +100,7 @@ def run(controller, green_led=None):
     for i in range(5,0,-1):
         if check_quit():
             pg.quit()
-            return
+            sys.exit()
         screen.fill(config.BLACK)
         text = countdown_text.render(f"{i}", True, config.WHITE)
         text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
@@ -111,7 +110,7 @@ def run(controller, green_led=None):
 
     if check_quit():
             pg.quit()
-            return
+            sys.exit()
     screen.fill(config.BLACK)
     text = countdown_text.render("PONG!", True, config.WHITE)
     text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
@@ -162,6 +161,7 @@ def run(controller, green_led=None):
         # takes everything that came before it in loop and draws it
         pg.display.flip()
         
-        clock.tick(config.FPS)        
+        clock.tick(config.FPS)
 
     pg.quit()
+    sys.exit()
