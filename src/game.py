@@ -66,10 +66,8 @@ def goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
     pg.display.flip()
     pg.time.wait(5000)
     
-def run(controller, red_led=None, green_led=None):
+def run(controller, green_led=None):
     pg.init()
-    if red_led:
-        red_led.off()
     if green_led:
         green_led.on()
     
