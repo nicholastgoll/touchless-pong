@@ -18,7 +18,7 @@ class SensorController():
             echo=config.ECHO_PIN,
             trigger=config.TRIGGER_PIN,
             max_distance=config.MAX_DISTANCE,
-            pin_factory=factory
+            pin_factory=config.FACTORY
         )
         
         self.readings = deque(maxlen=5)

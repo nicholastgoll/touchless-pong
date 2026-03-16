@@ -3,13 +3,34 @@ The purpose of this file is to provide constants to other files that are easily 
 '''
 
 import random
+from gpiozero import LED, TonalBuzzer
+from gpiozero.pins.pigpio import PiGPIOFactory
+import pygame
+
+FACTORY = PiGPIOFactory()
+
+# ----- SOUND EFFECTS -----
+pygame.mixer.init()
+
+COUNTDOWN_SOUND = pygame.mixer.Sound("sound_effects/COUNTDOWN.wav")
+GAME_START_SOUND = pygame.mixer.Sound("sound_effects/GAME_START.wav")
+SCORE_SOUND = pygame.mixer.Sound("sound_effects/SCORE.wav")
+LOST_POINT_SOUND = pygame.mixer.Sound("sound_effects/LOST_POINT.wav")
+WIN_SOUND = pygame.mixer.Sound("sound_effects/WIN.wav")
+LOSE_SOUND = pygame.mixer.Sound("sound_effects/LOSE.wav")
+
+# ----- LED -----
+GREEN_LED_PIN = LED(22, pin_factory=FACTORY)
+
+# ----- BUZZER -----
+BUZZER_PIN = TonalBuzzer(27, pin_factory=FACTORY)
 
 # ----- distance_sensor.py -----
 ECHO_PIN = 18
 TRIGGER_PIN = 17
 MAX_DISTANCE = 0.5
 
-SENSOR_MAX = 0.35 # 20 cm
+SENSOR_MAX = 0.35 # 35 cm
 SENSOR_MIN = 0.05 # 5 cm
 
 # ----- game.py -----

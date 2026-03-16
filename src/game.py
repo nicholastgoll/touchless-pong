@@ -1,5 +1,4 @@
 import pygame as pg
-import sys
 import random
 import config
 
@@ -11,6 +10,7 @@ def ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
         config.BALL_SPEED_X *= -1
     if ball.top <= 0:
         config.PLAYER_SCORE += 1
+        config.SCORE_SOUND.play()
         if config.PLAYER_SCORE == 7:
             goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font)
             return False
@@ -18,6 +18,7 @@ def ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
             ball_restart(ball, WIDTH, HEIGHT)
     if ball.bottom >= HEIGHT:
         config.OPPONENT_SCORE += 1
+        config.LOST_POINT_SOUND.play()
         if config.OPPONENT_SCORE == 7:
             goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font)
             return False
@@ -58,8 +59,10 @@ def goodbye(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
     pg.event.pump()
     screen.fill(config.BLACK)
     if config.PLAYER_SCORE == 7:
+        config.WIN_SOUND.play()
         text = goodbye_font.render("YOU WIN!!!", True, config.WHITE)
     if config.OPPONENT_SCORE == 7:
+        config.LOSE_SOUND.play()
         text = goodbye_font.render("YOU LOSE :(", True, config.WHITE)
     text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
     screen.blit(text, text_rect)
@@ -99,8 +102,8 @@ def run(controller):
     # countdown from 5 at start of game
     for i in range(5,0,-1):
         if check_quit():
-            pg.quit()
-            sys.exit()
+            return
+        config.COUNTDOWN_SOUND.play()
         screen.fill(config.BLACK)
         text = countdown_text.render(f"{i}", True, config.WHITE)
         text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
@@ -109,8 +112,8 @@ def run(controller):
         pg.time.wait(1000)
 
     if check_quit():
-            pg.quit()
-            sys.exit()
+            return
+    config.GAME_START_SOUND.play()
     screen.fill(config.BLACK)
     text = countdown_text.render("PONG!", True, config.WHITE)
     text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
@@ -162,6 +165,3 @@ def run(controller):
         pg.display.flip()
         
         clock.tick(config.FPS)
-
-    pg.quit()
-    sys.exit()
