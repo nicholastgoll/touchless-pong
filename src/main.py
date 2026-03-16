@@ -7,7 +7,8 @@ from controllers.distance_sensor import SensorController
 controller = SensorController()
 try:
     config.GREEN_LED_PIN.on()
-    game.run(controller)
+    stats = game.run(controller)
+    print(stats)
 
 finally:
     controller.sensor.close()

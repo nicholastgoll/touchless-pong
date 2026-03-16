@@ -1,6 +1,7 @@
 import pygame as pg
 import random
 import config
+import time
 
 def ball_movement(ball, player, opponent, WIDTH, HEIGHT, screen, goodbye_font):
     ball.x += config.BALL_SPEED_X * config.SPEED_MULTIPLIER
@@ -98,7 +99,7 @@ def run(controller):
         return False
 
 
-            
+    start_time = time.time()
     # countdown from 5 at start of game
     for i in range(5,0,-1):
         if check_quit():
@@ -165,3 +166,19 @@ def run(controller):
         pg.display.flip()
         
         clock.tick(config.FPS)
+    
+    duration = round(time.time() - start_time)
+    
+    stats = {
+        "player_score": config.PLAYER_SCORE,
+        "opponent_score": config.OPPONENT_SCORE,
+        "winner": "player" if config.PLAYER_SCORE > config.OPPONENT_SCORE else "opponent",
+        "duration_seconds": duration,
+    }
+    
+    # reset for replay
+    config.PLAYER_SCORE = 0
+    config.OPPONENT_SCORE = 0
+    config.SPEED_MULTIPLIER = 0.4
+    
+    return stats
