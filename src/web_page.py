@@ -6,6 +6,7 @@ import config
 from controllers.distance_sensor import SensorController
 from controllers.arrow_keys import ArrowKeyController
 import pygame as pg
+from notifications import send_sms
 
 @route('/')
 def home():
@@ -194,6 +195,9 @@ def start_game():
         controller.sensor.close() if hasattr(controller, 'sensor') else None
         pg.quit()
         config.GREEN_LED_PIN.off()
+        
+    if data.get('phone'):
+        send_sms(data['phone'], stats)
 
     response.content_type = 'application/json'
     return json.dumps(stats)
