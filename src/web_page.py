@@ -101,6 +101,7 @@ def home():
         <input type="email" id="email" placeholder="you@example.com">
 
         <button onclick="startGame()">Start Game</button>
+        <button onclick="showStats()" style="background:#333;margin-top:0.5rem;">Game History</button>
     </div>
 
     <!-- IN PROGRESS SCREEN -->
@@ -116,6 +117,17 @@ def home():
         <div id="stats-container"></div>
         <button onclick="showSetup()">Play Again</button>
         <button onclick="quitGame()" style="background: #e74c3c; margin-top: 0.5rem;">Quit</button>
+    </div>
+    
+    <!-- STATS SCREEN -->
+    <div id="stats" class="screen">
+        <h1>Game History</h1>
+        <p class="subtitle">Touchless Pong stats over time</p>
+        <iframe src="https://thingspeak.com/channels/3302374/charts/1?bgcolor=%23111111&color=%23ffffff&dynamic=true&title=Player+Score&type=line" width="100%" height="220" style="border:none;border-radius:8px;margin-bottom:0.75rem;"></iframe>
+        <iframe src="https://thingspeak.com/channels/3302374/charts/2?bgcolor=%23111111&color=%23ffffff&dynamic=true&title=Opponent+Score&type=line" width="100%" height="220" style="border:none;border-radius:8px;margin-bottom:0.75rem;"></iframe>
+        <iframe src="https://thingspeak.com/channels/3302374/charts/3?bgcolor=%23111111&color=%23ffffff&dynamic=true&title=Game+Duration+(seconds)&type=line" width="100%" height="220" style="border:none;border-radius:8px;margin-bottom:0.75rem;"></iframe>
+        <iframe src="https://thingspeak.com/channels/3302374/charts/4?bgcolor=%23111111&color=%23ffffff&dynamic=true&title=Win+Rate&type=line" width="100%" height="220" style="border:none;border-radius:8px;margin-bottom:0.75rem;"></iframe>
+        <button onclick="showSetup()">Back</button>
     </div>
 
 </div>
@@ -170,6 +182,9 @@ function quitGame() {
     fetch('/quit', { method: 'POST' })
     document.body.innerHTML = '<div style="display:flex; justify-content:center;align-items:center;height:100vh;color:#888;">Server stopped. You can close this tab.</div>';
 }
+
+function showStats() { showScreen('stats'); }
+
 </script>
 </body>
 </html>'''
