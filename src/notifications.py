@@ -1,13 +1,8 @@
 import os
-import clicksend_client
-from clicksend_client import SmsMessage
-from clicksend_client.rest import ApiException
-
-import warnings
-warnings.filterwarnings("ignore", category=ResourceWarning)
+import smtplib
+from email.mime.text import MIMEText
 
 def _load_env():
-    """Read .env file from project root."""
     env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env')
     if os.path.exists(env_path):
         with open(env_path) as f:
@@ -19,46 +14,37 @@ def _load_env():
 
 _load_env()
 
-def send_sms(phone, stats):
-    username = os.environ.get('CLICKSEND_USERNAME')
-    api_key = os.environ.get('CLICKSEND_API_KEY')
+def send_email(to_email, stats):
+    sender = os.environ.get('EMAIL_ADDRESS')
+    password = os.environ.get('EMAIL_APP_PASSWORD')
 
-    if not username or not api_key:
-        print("ClickSend credentials not found in .env")
+    if not sender or not password:
+        print("Email credentials not found in .env")
         return
-
-    configuration = clicksend_client.Configuration()
-    configuration.username = username
-    configuration.password = api_key
-
-    api_instance = clicksend_client.SMSApi(
-        clicksend_client.ApiClient(configuration)
-    )
 
     winner = "You won!" if stats['winner'] == 'player' else "You lost!"
     score = f"{stats['player_score']} - {stats['opponent_score']}"
     mins = stats['duration_seconds'] // 60
     secs = stats['duration_seconds'] % 60
 
-    body = f"Touchless Pong Results: {winner} Final score: {score}. Duration: {mins}m {secs}s."
+    body = f"""Touchless Pong Results
 
-    message = SmsMessage(
-        source="TouchlessPong",
-        body=body,
-        to=phone
-    )
-    sms_collection = clicksend_client.SmsMessageCollection(messages=[message])
+{winner}
+
+Final score: {score}
+Duration: {mins}m {secs}s
+
+Thanks for playing!"""
+
+    msg = MIMEText(body)
+    msg['Subject'] = 'Touchless Pong - Game Results'
+    msg['From'] = sender
+    msg['To'] = to_email
 
     try:
-        response = api_instance.sms_send_post(sms_collection)
-        import ast
-        result = ast.literal_eval(response)
-        status = result['data']['messages'][0]['status']
-        if status == 'SUCCESS':
-            print(f"SMS sent to {phone}")
-        else:
-            print(f"SMS failed: {status}")
-    except ApiException as e:
-        print(f"ClickSend error: {e}")
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+            server.login(sender, password)
+            server.send_message(msg)
+        print(f"Email sent to {to_email}")
     except Exception as e:
-        print(f"SMS notification error: {e}")
+        print(f"Email error: {e}")

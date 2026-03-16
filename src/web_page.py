@@ -6,7 +6,7 @@ import config
 from controllers.distance_sensor import SensorController
 from controllers.arrow_keys import ArrowKeyController
 import pygame as pg
-from notifications import send_sms
+from notifications import send_email
 
 @route('/')
 def home():
@@ -97,9 +97,6 @@ def home():
             <option value="keyboard">Arrow keys</option>
         </select>
 
-        <label>Phone number (optional)</label>
-        <input type="tel" id="phone" placeholder="+1234567890">
-
         <label>Email (optional)</label>
         <input type="email" id="email" placeholder="you@example.com">
 
@@ -135,7 +132,6 @@ function startGame() {
 
     const data = {
         controller: document.getElementById('controller').value,
-        phone: document.getElementById('phone').value,
         email: document.getElementById('email').value
     };
 
@@ -196,8 +192,8 @@ def start_game():
         pg.quit()
         config.GREEN_LED_PIN.off()
         
-    if data.get('phone'):
-        send_sms(data['phone'], stats)
+    if data.get('email'):
+        send_email(data['email'], stats)
 
     response.content_type = 'application/json'
     return json.dumps(stats)
