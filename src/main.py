@@ -10,6 +10,7 @@ try:
     game.run(controller)
 
 finally:
-    game.pg.quit() 
+    controller.sensor.close()
+    game.pg.quit()
     config.GREEN_LED_PIN.off()
-    SensorController.sensor.close()
+    
