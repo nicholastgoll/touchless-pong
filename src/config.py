@@ -3,27 +3,39 @@ The purpose of this file is to provide constants to other files that are easily 
 '''
 
 import random
-from gpiozero import LED, TonalBuzzer
-from gpiozero.pins.pigpio import PiGPIOFactory
 import pygame
+import os
 
-FACTORY = PiGPIOFactory()
+_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
+
+try:
+    from gpiozero import LED, TonalBuzzer
+    from gpiozero.pins.pigpio import PiGPIOFactory
+    FACTORY = PiGPIOFactory()
+    
+    # ----- LED -----
+    GREEN_LED_PIN = LED(22, pin_factory=FACTORY)
+
+# ----- BUZZER -----
+    BUZZER_PIN = TonalBuzzer(27, pin_factory=FACTORY)
+
+except Exception:
+    FACTORY = None
+    GREEN_LED_PIN = None
+    BUZZER_PIN = None
+    
 # ----- SOUND EFFECTS -----
 pygame.mixer.init()
 
-COUNTDOWN_SOUND = pygame.mixer.Sound("sound_effects/COUNTDOWN.wav")
-GAME_START_SOUND = pygame.mixer.Sound("sound_effects/GAME_START.wav")
-SCORE_SOUND = pygame.mixer.Sound("sound_effects/SCORE.wav")
-LOST_POINT_SOUND = pygame.mixer.Sound("sound_effects/LOST_POINT.wav")
-WIN_SOUND = pygame.mixer.Sound("sound_effects/WIN.wav")
-LOSE_SOUND = pygame.mixer.Sound("sound_effects/LOSE.wav")
+COUNTDOWN_SOUND = pygame.mixer.Sound(os.path.join(_DIR, "sound_effects", "COUNTDOWN.wav"))
+GAME_START_SOUND = pygame.mixer.Sound(os.path.join(_DIR, "sound_effects", "GAME_START.wav"))
+SCORE_SOUND = pygame.mixer.Sound(os.path.join(_DIR, "sound_effects", "SCORE.wav"))
+LOST_POINT_SOUND = pygame.mixer.Sound(os.path.join(_DIR, "sound_effects", "LOST_POINT.wav"))
+WIN_SOUND = pygame.mixer.Sound(os.path.join(_DIR, "sound_effects", "WIN.wav"))
+LOSE_SOUND = pygame.mixer.Sound(os.path.join(_DIR, "sound_effects", "LOSE.wav"))
 
-# ----- LED -----
-GREEN_LED_PIN = LED(22, pin_factory=FACTORY)
-
-# ----- BUZZER -----
-BUZZER_PIN = TonalBuzzer(27, pin_factory=FACTORY)
 
 # ----- distance_sensor.py -----
 ECHO_PIN = 18
