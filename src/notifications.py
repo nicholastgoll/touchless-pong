@@ -51,13 +51,13 @@ def send_sms(phone, stats):
 
     try:
         response = api_instance.sms_send_post(sms_collection)
-        import json as _json
-        result = _json.loads(response)
+        import ast
+        result = ast.literal_eval(response)
         status = result['data']['messages'][0]['status']
         if status == 'SUCCESS':
             print(f"SMS sent to {phone}")
         else:
-            print(f"Failed to send SMS: {status}")
+            print(f"SMS failed: {status}")
     except ApiException as e:
         print(f"ClickSend error: {e}")
     except Exception as e:
