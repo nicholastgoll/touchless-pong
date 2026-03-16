@@ -30,5 +30,5 @@ This project includes a web interface for game setup, and LED status indicator, 
 
 **Wiring** *(important if you are not planning on changing pin variables in code)*
 - HC-SR04 Wiring
-![taken from Raspberry Pi Cookbook, 3rd Edition, Simon Monk](installation_imgs/HC-SR04 Wiring.png)
+![Alt text for the image](installation_imgs/HC-SR04 Wiring.png)
 
