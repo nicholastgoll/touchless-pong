@@ -1,2 +1,4 @@
 gpiozero
 pygame
+pigpio
+bottle
