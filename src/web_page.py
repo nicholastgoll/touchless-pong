@@ -117,6 +117,7 @@ def home():
         <h1 id="result-title"></h1>
         <div id="stats-container"></div>
         <button onclick="showSetup()">Play Again</button>
+        <button onclick="quitGame()" style="background: #e74c3c; margin-top: 0.5rem;">Quit</button>
     </div>
 
 </div>
@@ -167,6 +168,11 @@ function startGame() {
         showSetup();
     });
 }
+
+function quitGame() {
+    fetch('/quit', { method: 'POST' })
+    document.body.innerHTML = '<div style="display:flex; justify-content:center;align-items:center;height:100vh;color:#888;">Server stopped. You can close this tab.</div>';
+}
 </script>
 </body>
 </html>'''
@@ -191,6 +197,12 @@ def start_game():
 
     response.content_type = 'application/json'
     return json.dumps(stats)
+
+@route('/quit', method='POST')
+def quit_game():
+    config.GREEN_LED_PIN.off()
+    import os
+    os._exit(0)
 
 
 if __name__ == '__main__':
