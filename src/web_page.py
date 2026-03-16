@@ -6,7 +6,7 @@ import config
 from controllers.distance_sensor import SensorController
 from controllers.arrow_keys import ArrowKeyController
 import pygame as pg
-from notifications import send_email
+from notifications import send_email, log_to_thingspeak
 
 @route('/')
 def home():
@@ -191,6 +191,8 @@ def start_game():
         controller.sensor.close() if hasattr(controller, 'sensor') else None
         pg.quit()
         config.GREEN_LED_PIN.off()
+        
+    log_to_thingspeak(stats, data['controller'])
         
     if data.get('email'):
         send_email(data['email'], stats)

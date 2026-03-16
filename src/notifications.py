@@ -48,3 +48,36 @@ Thanks for playing!"""
         print(f"Email sent to {to_email}")
     except Exception as e:
         print(f"Email error: {e}")
+        
+
+# THINGSPEAK LOGIC
+
+import urllib.request
+import urllib.parse
+
+def log_to_thingspeak(stats, controller_type):
+    api_key = os.environ.get('THINGSPEAK_API_KEY')
+    if not api_key:
+        print("ThingSpeak API key not found in .env")
+        return
+
+    params = urllib.parse.urlencode({
+        'api_key': api_key,
+        'field1': stats['player_score'],
+        'field2': stats['opponent_score'],
+        'field3': stats['duration_seconds'],
+        'field4': 1 if stats['winner'] == 'player' else 0,
+        'field5': 1 if controller_type == 'sensor' else 0,
+    })
+
+    url = f"https://api.thingspeak.com/update?{params}"
+
+    try:
+        req = urllib.request.urlopen(url)
+        response = req.read().decode()
+        if response == '0':
+            print("ThingSpeak error: update failed")
+        else:
+            print(f"ThingSpeak: logged entry #{response}")
+    except Exception as e:
+        print(f"ThingSpeak error: {e}")
