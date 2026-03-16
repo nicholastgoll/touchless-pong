@@ -13,6 +13,7 @@ FACTORY = PiGPIOFactory()
 pygame.mixer.init()
 
 COUNTDOWN_SOUND = pygame.mixer.Sound("sound_effects/COUNTDOWN.wav")
+GAME_START_SOUND = pygame.mixer.Sound("sound_effects/GAME_START.wav")
 SCORE_SOUND = pygame.mixer.Sound("sound_effects/SCORE.wav")
 LOST_POINT_SOUND = pygame.mixer.Sound("sound_effects/LOST_POINT.wav")
 WIN_SOUND = pygame.mixer.Sound("sound_effects/WIN.wav")

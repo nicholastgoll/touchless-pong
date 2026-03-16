@@ -113,6 +113,7 @@ def run(controller):
 
     if check_quit():
             return
+    config.GAME_START_SOUND.play()
     screen.fill(config.BLACK)
     text = countdown_text.render("PONG!", True, config.WHITE)
     text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
