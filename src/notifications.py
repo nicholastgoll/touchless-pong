@@ -3,6 +3,9 @@ import clicksend_client
 from clicksend_client import SmsMessage
 from clicksend_client.rest import ApiException
 
+import warnings
+warnings.filterwarnings("ignore", category=ResourceWarning)
+
 def _load_env():
     """Read .env file from project root."""
     env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env')
@@ -48,6 +51,7 @@ def send_sms(phone, stats):
 
     try:
         response = api_instance.sms_send_post(sms_collection)
+        print(f"ClickSend response: {response}")
         print(f"SMS sent to {phone}")
     except ApiException as e:
         print(f"ClickSend error: {e}")

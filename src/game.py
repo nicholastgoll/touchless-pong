@@ -52,7 +52,7 @@ def opponent_movement(opponent, ball, WIDTH):
         opponent.left -= config.OPPONENT_SPEED 
         
 def ball_restart(ball, WIDTH, HEIGHT):
-    ball.center = (WIDTH/2, HEIGHT/2)
+    ball.center = (WIDTH//2, HEIGHT//2)
     config.BALL_SPEED_X *= random.choice((1, -1))
     config.SPEED_MULTIPLIER = 0.4
     
@@ -80,9 +80,9 @@ def run(controller):
     clock = pg.time.Clock()
     
     # game rects
-    ball = pg.Rect(WIDTH/2 - 10, HEIGHT/2 - 10, 20, 20)
-    player = pg.Rect(WIDTH/2 - 60, HEIGHT - 10, 120, 10)
-    opponent = pg.Rect(WIDTH/2 - 60, 0, 120, 10)
+    ball = pg.Rect(WIDTH//2 - 10, HEIGHT/2 - 10, 20, 20)
+    player = pg.Rect(WIDTH//2 - 60, HEIGHT - 10, 120, 10)
+    opponent = pg.Rect(WIDTH//2 - 60, 0, 120, 10)
     #original speed needed for opponent movement pauses
     old_speed = config.OPPONENT_SPEED
 
@@ -139,7 +139,7 @@ def run(controller):
         
         player_movement(player, controller, WIDTH)
         
-        if ball.y >= HEIGHT/2:
+        if ball.y >= HEIGHT//2:
             config.OPPONENT_SPEED = 0
         else:
             config.OPPONENT_SPEED = old_speed
@@ -150,7 +150,7 @@ def run(controller):
         pg.draw.line(screen, config.WHITE, (0,0), (0,HEIGHT), 5)
         pg.draw.line(screen, config.WHITE, (WIDTH - 2, 0), (WIDTH - 2, HEIGHT), 5)
         for i in range(0, WIDTH + 1, 15):
-            pg.draw.line(screen, config.WHITE, (i, HEIGHT/2), ((i + 5), HEIGHT/2), 5)
+            pg.draw.line(screen, config.WHITE, (i, HEIGHT//2), ((i + 5), HEIGHT//2), 5)
             
         pg.draw.rect(screen, config.WHITE, ball)
         pg.draw.rect(screen, config.WHITE, player)
@@ -159,8 +159,8 @@ def run(controller):
         score_player_surface = score_player.render(f"{config.PLAYER_SCORE}", True, config.WHITE)
         score_opponent_surface = score_opponent.render(f"{config.OPPONENT_SCORE}", True, config.WHITE)
         
-        screen.blit(score_player_surface, (WIDTH-48,(HEIGHT/2)+10))
-        screen.blit(score_opponent_surface, (WIDTH-48, (HEIGHT/2)-72))
+        screen.blit(score_player_surface, (WIDTH-48,(HEIGHT//2)+10))
+        screen.blit(score_opponent_surface, (WIDTH-48, (HEIGHT//2)-72))
             
         # takes everything that came before it in loop and draws it
         pg.display.flip()
