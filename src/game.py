@@ -180,5 +180,6 @@ def run(controller):
     config.PLAYER_SCORE = 0
     config.OPPONENT_SCORE = 0
     config.SPEED_MULTIPLIER = 0.4
+    config.OPPONENT_SPEED = 3
     
     return stats
