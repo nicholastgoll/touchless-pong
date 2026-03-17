@@ -13,7 +13,6 @@ from time import sleep
 
 class SensorController():
     def __init__(self):
-        factory = PiGPIOFactory()
         self.sensor = DistanceSensor(
             echo=config.ECHO_PIN,
             trigger=config.TRIGGER_PIN,
@@ -21,7 +20,6 @@ class SensorController():
             pin_factory=config.FACTORY
         )
         
-        self.readings = deque(maxlen=5)
         self.smoothed = 0.5
         self.alpha = 0.3
         
