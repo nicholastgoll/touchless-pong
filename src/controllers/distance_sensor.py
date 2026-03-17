@@ -23,7 +23,6 @@ class SensorController():
         self.smoothed = 0.5
         self.alpha = 0.3
         
-    # returns float 0.0-1 where 1 is MAX_DISTANCE
     def get_paddle_pos(self):
         raw = self.sensor.distance
         mapped = (raw - config.SENSOR_MIN) / (config.SENSOR_MAX - config.SENSOR_MIN)
