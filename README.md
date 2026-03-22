@@ -33,15 +33,15 @@ This project includes a web interface for game setup, and LED status indicator, 
 ![Taken from: Raspberry Pi Cookbook, 3rd Edition, Simon Monk](installation_imgs/HC-SR04_Wiring.png)
 Taken from Raspberry Pi Cookbook, 3rd Edition, Simon Monk
 
-- LED wiring
+- LED wiring:
 green LED is connected to GPIO pin 22 through 470 Ohm resistor, then to ground
 
-- Speaker
+- Speaker:
 This is just connected via the RPi's built-in audio jack
 
 **Software Setup**
 You will need:
-Pygame, gpiozero, Bottle, pifpio, ThingSpeak
+Pygame, gpiozero, Bottle, pigpio, ThingSpeak
 1. clone the repo and `cd touchless-pong`
 2. install dependencies listed in dependencies.txt
 3. on RPi start the pigpiod daemon with `sudo pigpiod` and to start automatically on boot `sudo systemctl enable pigpiod`
